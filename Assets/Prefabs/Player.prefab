@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5474699029204539088}
   - component: {fileID: 2140827354928372309}
   - component: {fileID: 3051962143304474886}
+  - component: {fileID: 7130699969910067038}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,6 +124,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7130699969910067038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672268809197861364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ee830160912c440b60b5aadf8777a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 5
+  jetpackStrength: 1
+  moveSpeed: 1
+  currDirection: 0
+  currThrust: 0
+  health: 10
+  mainCamera: {fileID: 0}
 --- !u!1 &7774556529385763160
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +154,7 @@ GameObject:
   - component: {fileID: 3615383703920324248}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
