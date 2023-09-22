@@ -32,7 +32,7 @@ public class BulletBehavior : MonoBehaviour
         }
         if(col.tag == "Enemy"){ //if bullet hits enemy, Kill enemy, give player more fuel, destroy bullet. EDIT NEEDED**
 
-            Destroy(col.gameObject);//Currently enemies are immediately killed when hit. Let's develop a health system.
+            //Destroy(col.gameObject);//Currently enemies are immediately killed when hit. Let's develop a health system.
             //only after we've checked that the enemy health is 0 do we destroy it and add fuel to the player.
             player.currentFuel += 2;
             Destroy(gameObject);
