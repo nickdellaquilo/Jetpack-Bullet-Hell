@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CharacterController : MonoBehaviour
 {
@@ -99,7 +100,9 @@ public class CharacterController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col){
         if(col.gameObject.tag =="Hazard_Ground"){
-            Destroy(gameObject); //**EDIT NEEDED Also trigger game over screen, high score, etc. THERE IS NO HEALTH IN THE GAME, hitting the ground is an immediate game over
+            Destroy(gameObject);
+            SceneManager.LoadScene(2);
+            //**EDIT NEEDED Also trigger game over screen, high score, etc. THERE IS NO HEALTH IN THE GAME, hitting the ground is an immediate game over
         }
     }
 

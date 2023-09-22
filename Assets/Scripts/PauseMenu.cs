@@ -31,7 +31,6 @@ public class PauseMenu : MonoBehaviour
         settings.SetActive(false);
         controls.SetActive(false);
         Time.timeScale = 1f;
-        Cursor.visible = false;
     }
 
     public void LoadSettings()
