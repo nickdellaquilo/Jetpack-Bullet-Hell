@@ -5,22 +5,21 @@ using UnityEngine;
 public class GameBGM : MonoBehaviour
 {
     private static GameBGM instance = null;
+    public AudioSource bgm;
     void Awake()
     {
-        if(instance == null)
-        {
+        if(instance == null){
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this.gameObject);
         }
-        else if(instance != this)
-        {
-            Destroy(gameObject);
+        else{
+            Destroy(this.gameObject);
         }
     }
 
     public void RestartMusic(){
-        GetComponent<AudioSource>().Stop();
-        GetComponent<AudioSource>().Play();
+        bgm.Stop();
+        bgm.Play();
     }
 
 }

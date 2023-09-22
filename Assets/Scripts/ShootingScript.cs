@@ -25,6 +25,8 @@ public class ShootingScript : MonoBehaviour
     //Used for Ammo display:
     public TMP_Text ammoDisplay;
     
+    //Used for sound effects:
+    public AudioSource gunShot;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +70,7 @@ public class ShootingScript : MonoBehaviour
 
         //If left click and shooting conditions are met:
         if(Input.GetMouseButton(0) && canShoot && !reloading){
+            gunShot.Play();
             canShoot = false;
             ammo--;
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);

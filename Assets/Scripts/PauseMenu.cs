@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject settings;
     public GameObject controls;
+    public GameObject[] gameObjects;
 
     private void Update()
     {
@@ -20,7 +21,10 @@ public class PauseMenu : MonoBehaviour
             {
                 pauseMenu.SetActive(true);
             }
-
+            foreach (GameObject go in gameObjects)
+            {
+                go.SetActive(false);
+            }
             Time.timeScale = 0f;
         }
     }
@@ -31,6 +35,10 @@ public class PauseMenu : MonoBehaviour
         settings.SetActive(false);
         controls.SetActive(false);
         Time.timeScale = 1f;
+        foreach (GameObject go in gameObjects)
+        {
+            go.SetActive(true);
+        }
     }
 
     public void LoadSettings()

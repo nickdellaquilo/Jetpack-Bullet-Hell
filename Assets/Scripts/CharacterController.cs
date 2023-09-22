@@ -32,6 +32,9 @@ public class CharacterController : MonoBehaviour
     private ShootingScript shoot;
     private SpriteRenderer sr;
 
+    //Used for sound effects:
+    public AudioSource gunShoot;
+    
     public TMP_Text dashDisplay;
 
     void Start()
@@ -101,6 +104,7 @@ public class CharacterController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col){
         if(col.gameObject.tag =="Hazard_Ground"){
             Destroy(gameObject);
+            gunShoot.Stop();
             SceneManager.LoadScene(2);
             //**EDIT NEEDED Also trigger game over screen, high score, etc. THERE IS NO HEALTH IN THE GAME, hitting the ground is an immediate game over
         }
