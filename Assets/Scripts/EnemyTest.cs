@@ -12,17 +12,35 @@ public class EnemyTest : MonoBehaviour
     //Spotting distance is the distance at which the enemy will start chasing the player
     public float spottingDistance = 10f;
     //Patrol points are the points that the enemy will move between
-    public Transform[] patrolPoints;
+    private Transform[] patrolPoints;
+    public int numberOfPatrolPoints = 5;
+    public Vector2 minPatrolBounds = new Vector2(-10, -10);
+    public Vector2 maxPatrolBounds = new Vector2(10, 10);
     private int currentPatrolPoint = 0;
     private Transform player;
     private bool isChasing = false;
+    private int currentHealth;
 
     //Enemies start by patrolling between patrol points
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         Animation_1_Idle();
+
+        patrolPoints = new Transform[numberOfPatrolPoints];
+        for (int i = 0; i < numberOfPatrolPoints; i++)
+        {
+            GameObject go = new GameObject("PatrolPoint" + i);
+            go.transform.position = new Vector3(
+                Random.Range(minPatrolBounds.x, maxPatrolBounds.x),
+                Random.Range(minPatrolBounds.y, maxPatrolBounds.y),
+                0 
+            );
+            patrolPoints[i] = go.transform;
+        }
+
         StartCoroutine(Patrol());
+        currentHealth = Random.Range(1, 4);
     }
 
     //Patrol is a coroutine so that we can pause the enemy for a few seconds at each patrol point
@@ -72,6 +90,14 @@ public class EnemyTest : MonoBehaviour
                 StartCoroutine(Patrol());
                 yield break;
             }
+
+            if (Vector3.Distance(transform.position, player.position) <= 1.5f)
+            {
+                Animation_6_Attack();
+                yield return new WaitForSeconds(1f);
+                Animation_1_Idle();
+                yield return new WaitForSeconds(1f);
+            }
             
             yield return null;
         }
@@ -82,9 +108,18 @@ public class EnemyTest : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
-            Debug.Log("enemy is dead");
+            TakeDamage(1);
+        }
+    }
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        Animation_3_Hit();
+        if(currentHealth <= 0)
+        {
             Animation_4_Death();
-            Destroy(gameObject, 2f);   // Destroy the enemy after playing the death animation, assuming the animation lasts 2 seconds
+            Destroy(gameObject, 0.75f);
         }
     }
 
@@ -137,42 +172,7 @@ public class EnemyTest : MonoBehaviour
             }
         }
     }
-    public void Animation_5_Ability()
-    {
-        for (int i = 0; i < EnemyAnims.Length; i++)
-        {
-            if (EnemyAnims[i].gameObject.activeSelf == true)
-            {
-                EnemyAnims[i].SetBool("Run", false);
-                EnemyAnims[i].SetBool("Ability", true);
-                Debug.Log("The enemy " + EnemyAnims[i].gameObject.name + " is using its First Ability");
-            }
-        }
-    }
-    public void Animation_5_Ability2()
-    {
-        for (int i = 0; i < EnemyAnims.Length; i++)
-        {
-            if (EnemyAnims[i].gameObject.activeSelf == true)
-            {
-                EnemyAnims[i].SetBool("Run", false);
-                EnemyAnims[i].SetBool("Ability 2", true);
-                Debug.Log("The enemy " + EnemyAnims[i].gameObject.name + " is using its Second Ability");
-            }
-        }
-    }
-    public void Animation_5_Ability3()
-    {
-        for (int i = 0; i < EnemyAnims.Length; i++)
-        {
-            if (EnemyAnims[i].gameObject.activeSelf == true)
-            {
-                EnemyAnims[i].SetBool("Run", false);
-                EnemyAnims[i].SetBool("Ability 3", true);
-                Debug.Log("The enemy " + EnemyAnims[i].gameObject.name + " is using its Third Ability");
-            }
-        }
-    }
+
     public void Animation_6_Attack()
     {
         for (int i = 0; i < EnemyAnims.Length; i++)
