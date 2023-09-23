@@ -3055,7 +3055,7 @@ MonoBehaviour:
   minSpawnPosition: {x: -8.74, y: -4.75}
   maxSpawnPosition: {x: 8.21, y: 3.91}
   initialEnemyCount: 4
-  timeBetweenWaves: 5
+  timeBetweenWaves: 3
   minWave: 1
   maxWave: 3
 --- !u!4 &1203921939
