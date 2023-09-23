@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class EnemyTest : MonoBehaviour
 {
-    
     [SerializeField] private Animator[] EnemyAnims;
+    //Patrol speed is the speed at which the enemy moves between patrol points
     public float patrolSpeed = 2f;
+    //Chase speed is the speed at which the enemy moves towards the player when chasing
     public float chaseSpeed = 4f;
+    //Spotting distance is the distance at which the enemy will start chasing the player
     public float spottingDistance = 10f;
+    //Patrol points are the points that the enemy will move between
     public Transform[] patrolPoints;
     private int currentPatrolPoint = 0;
     private Transform player;
     private bool isChasing = false;
 
+    //Enemies start by patrolling between patrol points
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -21,6 +25,7 @@ public class EnemyTest : MonoBehaviour
         StartCoroutine(Patrol());
     }
 
+    //Patrol is a coroutine so that we can pause the enemy for a few seconds at each patrol point
     IEnumerator Patrol()
     {
         while (!isChasing)
@@ -46,12 +51,14 @@ public class EnemyTest : MonoBehaviour
         }
     }
 
+    //MoveTowards moves the enemy towards a target at a specified speed
     void MoveTowards(Transform target, float speed)
     {
         Vector3 dir = (target.position - transform.position).normalized;
         transform.position += dir * speed * Time.deltaTime;
     }
 
+    //ChasePlayer is a coroutine so that we can stop chasing the player when they are out of range
     IEnumerator ChasePlayer()
     {
         while (isChasing)
@@ -70,6 +77,7 @@ public class EnemyTest : MonoBehaviour
         }
     }
 
+    //If the enemy collides with a bullet, play the animation, and destroy the enemy
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Bullet"))
@@ -81,6 +89,7 @@ public class EnemyTest : MonoBehaviour
     }
 
 
+    //Animation Functions
     public void Animation_1_Idle()
     {
         for (int i = 0; i < EnemyAnims.Length; i++)
