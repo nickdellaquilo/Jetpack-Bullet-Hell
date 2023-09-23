@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyTest : MonoBehaviour
 {
+    private CharacterController cc;
+    private bool dead = true;
     [SerializeField] private Animator[] EnemyAnims;
     //Patrol speed is the speed at which the enemy moves between patrol points
     public float patrolSpeed = 2f;
@@ -20,10 +22,12 @@ public class EnemyTest : MonoBehaviour
     private Transform player;
     private bool isChasing = false;
     private int currentHealth;
+    
 
     //Enemies start by patrolling between patrol points
     void Start()
     {
+        cc = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         Animation_1_Idle();
 
@@ -119,6 +123,11 @@ public class EnemyTest : MonoBehaviour
         if(currentHealth <= 0)
         {
             Animation_4_Death();
+            if(dead){ //adds fuel to player when enemy dies. bool is here because the delay on death meant this code was running multiple times
+                cc.currentFuel += 2;
+                dead = false;
+            }
+            
             Destroy(gameObject, 0.75f);
         }
     }

@@ -59,7 +59,7 @@ public class CharacterController : MonoBehaviour
             
         }
         if(currentFuel < 0f) currentFuel = 0f;//if the player dashed right before running out of fuel, fuel would be at a large-sih negative value. This stops that
-
+        if(currentFuel > maxFuel) currentFuel = maxFuel;
 
         fuelBar.UpdateFuel(currentFuel, maxFuel);//check current fuel every frame and update slider
 

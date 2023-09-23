@@ -170,9 +170,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyAnims:
   - {fileID: 8666745215718381762}
-  patrolSpeed: 1
-  chaseSpeed: 2
-  spottingDistance: 2
+  patrolSpeed: 2
+  chaseSpeed: 4
+  spottingDistance: 8
   numberOfPatrolPoints: 5
   minPatrolBounds: {x: -8, y: -4}
   maxPatrolBounds: {x: 8, y: 4}

@@ -34,7 +34,7 @@ public class BulletBehavior : MonoBehaviour
 
             //Destroy(col.gameObject);//Currently enemies are immediately killed when hit. Let's develop a health system.
             //only after we've checked that the enemy health is 0 do we destroy it and add fuel to the player.
-            player.currentFuel += 2;
+            //player.currentFuel += 2;
             Destroy(gameObject);
         }
     }
