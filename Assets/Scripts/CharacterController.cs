@@ -37,6 +37,8 @@ public class CharacterController : MonoBehaviour
     
     public TMP_Text dashDisplay;
 
+    public CountdownUI timer;
+
     void Start()
     {//Initialize values
         rb = GetComponent<Rigidbody2D>();
@@ -103,6 +105,7 @@ public class CharacterController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col){
         if(col.gameObject.tag =="Hazard_Ground"){
+            PlayerPrefs.SetFloat("Time", timer.survivalTime);
             Destroy(gameObject);
             gunShoot.Stop();
             SceneManager.LoadScene(2);
