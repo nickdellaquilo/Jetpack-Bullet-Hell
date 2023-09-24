@@ -23,6 +23,12 @@ public class EnemyTest : MonoBehaviour
     private bool isChasing = false;
     private int currentHealth;
     
+    // Damage VFX
+    public float flashDuration = 0.2f;
+    public Color flashColor = Color.red;
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
+    private bool isFlashing = false;
 
     //Enemies start by patrolling between patrol points
     void Start()
@@ -45,6 +51,9 @@ public class EnemyTest : MonoBehaviour
 
         StartCoroutine(Patrol());
         currentHealth = Random.Range(1, 4);
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
     }
 
     //Patrol is a coroutine so that we can pause the enemy for a few seconds at each patrol point
@@ -128,6 +137,14 @@ public class EnemyTest : MonoBehaviour
     {
         currentHealth -= damage;
         Animation_3_Hit();
+
+        if (!isFlashing)
+        {
+            isFlashing = true;
+            spriteRenderer.color = flashColor;
+            Invoke("EndFlash", flashDuration);
+        }
+
         if(currentHealth <= 0)
         {
             Animation_4_Death();
@@ -140,6 +157,11 @@ public class EnemyTest : MonoBehaviour
         }
     }
 
+    private void EndFlash()
+    {
+        isFlashing = false;
+        spriteRenderer.color = originalColor;
+    }
 
     //Animation Functions
     public void Animation_1_Idle()
