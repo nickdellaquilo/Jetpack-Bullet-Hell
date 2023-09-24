@@ -11,6 +11,8 @@ public class CharacterController : MonoBehaviour
     //Used for movement:
     public float speed;
     public float launchSpeed;
+    public float maxUpwardsVelocity;
+    public float maxDownwardsVelocity;
     private float horiz;
     
     //Used for dashing:
@@ -84,6 +86,10 @@ public class CharacterController : MonoBehaviour
         if((shoot.rotation.x > 0 && sr.flipX) || (shoot.rotation.x < 0 && !sr.flipX)){
             sr.flipX = !sr.flipX;
         }
+
+        // Limit to vertical speed to prevent unwinnable scenarios.
+        float clampedVerticalSpeed = Mathf.Clamp(rb.velocity.y, -maxDownwardsVelocity, maxUpwardsVelocity);
+        rb.velocity = new Vector2(rb.velocity.x, clampedVerticalSpeed);
     }
 
 

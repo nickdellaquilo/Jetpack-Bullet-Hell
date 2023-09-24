@@ -9441,7 +9441,7 @@ PrefabInstance:
       objectReference: {fileID: 1346591333}
     - target: {fileID: 7130699969910067038, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
       propertyPath: speed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7130699969910067038, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
       propertyPath: timer
@@ -9477,7 +9477,7 @@ PrefabInstance:
       objectReference: {fileID: 2042339939}
     - target: {fileID: 7130699969910067038, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
       propertyPath: launchSpeed
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7130699969910067038, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
       propertyPath: dashCooldown
@@ -9494,6 +9494,18 @@ PrefabInstance:
     - target: {fileID: 7130699969910067038, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
       propertyPath: jetpackStrength
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130699969910067038, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
+      propertyPath: maxVerticalSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130699969910067038, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
+      propertyPath: maxUpwardsVelocity
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130699969910067038, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
+      propertyPath: maxDownwardsVelocity
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7774556529385763160, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
       propertyPath: m_Name
