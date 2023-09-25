@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class CharacterController : MonoBehaviour
 {
+    private Collider2D collider;
     public EnemySpawner es;
     private Rigidbody2D rb;
 
@@ -56,6 +57,7 @@ public class CharacterController : MonoBehaviour
         fuelBar.UpdateFuel(currentFuel, maxFuel);
         sr = GetComponent<SpriteRenderer>();
         shoot = GetComponentInChildren<ShootingScript>();
+        collider = GetComponent<Collider2D>();
     }
 
     void Update()
@@ -72,12 +74,14 @@ public class CharacterController : MonoBehaviour
         }
         if(currentFuel < 0f) currentFuel = 0f;//if the player dashed right before running out of fuel, fuel would be at a large-sih negative value. This stops that
         if(currentFuel > maxFuel) currentFuel = maxFuel;
+        if(isInvulnerable) collider.enabled = false;
+        else collider.enabled = true;
 
         fuelBar.UpdateFuel(currentFuel, maxFuel);//check current fuel every frame and update slider
 
         //Intiate Dash Coroutine and lose chunk of fuel
         if(Input.GetKeyDown(KeyCode.LeftShift) && canDash && currentFuel > 0f){
-            currentFuel -= 2;
+            currentFuel -= 1f;
             StartCoroutine(Dash());
         }
 
@@ -105,7 +109,10 @@ public class CharacterController : MonoBehaviour
             horiz = Input.GetAxisRaw("Horizontal");
             transform.Translate(horiz * speed * Time.deltaTime, 0f, 0f);
             if(Input.GetKey(KeyCode.W) && currentFuel > 0f){
-                currentFuel -= 0.01f * es.maxWave;
+                if(es.maxWave < 6)
+                    currentFuel -= 0.02f * es.maxWave;
+                else
+                    currentFuel -= 0.02f * 5;
                 rb.AddForce(Vector3.up * launchSpeed);
             }
         }

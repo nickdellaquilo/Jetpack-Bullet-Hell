@@ -2350,7 +2350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6914132615722826005, guid: f1579d95d859ae441bd3e09fef5e025c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.06
+      value: -9.42
       objectReference: {fileID: 0}
     - target: {fileID: 6914132615722826005, guid: f1579d95d859ae441bd3e09fef5e025c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2655,7 +2655,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -3264,7 +3264,7 @@ GameObject:
   - component: {fileID: 1203921938}
   m_Layer: 0
   m_Name: EnemySpawner
-  m_TagString: Untagged
+  m_TagString: Enemy Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3281,6 +3281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce79c2970282654fb1590755c9fe7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 1326270411}
   enemyPrefab: {fileID: 7099924799389085881, guid: 067cc245e32a19f459150583a878305a, type: 3}
   minSpawnPosition: {x: -8.74, y: -4.75}
   maxSpawnPosition: {x: 8.21, y: 3.91}
@@ -3289,7 +3290,12 @@ MonoBehaviour:
   timeToDifficulty: 20
   minWave: 1
   maxWave: 2
+  levelInt: 1
   level: Level 1
+  wave: {fileID: 1312989369831134095, guid: 9cdd51f85137323479f243e8e24ad6c7, type: 3}
+  explain: {fileID: 8950275279456908828, guid: 662fd10cae84a294b8721b777657643f, type: 3}
+  shootRate: 2
+  chaseSpeed: 2
 --- !u!4 &1203921939
 Transform:
   m_ObjectHideFlags: 0
@@ -8938,7 +8944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6914132615722826005, guid: f1579d95d859ae441bd3e09fef5e025c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.06
+      value: 9.46
       objectReference: {fileID: 0}
     - target: {fileID: 6914132615722826005, guid: f1579d95d859ae441bd3e09fef5e025c, type: 3}
       propertyPath: m_LocalPosition.y

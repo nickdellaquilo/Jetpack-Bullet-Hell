@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyTest : MonoBehaviour
 {
+    private EnemySpawner es;
+    private int currentLevel = 1;
     private CharacterController cc;
     private bool dead = true;
     [SerializeField] private Animator[] EnemyAnims;
@@ -32,14 +34,15 @@ public class EnemyTest : MonoBehaviour
 
     //Enemies start by patrolling between patrol points
     public GameObject bulletPrefab;
-    public float shootRate = 1.0f;
-    private float shootTimer;
+    public float shootRate = 2.0f;
+    private float shootTimer = 0.3f;
     public float bulletSpeed = 5f;
 
     void Start()
     {
         cc = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        es = GameObject.FindGameObjectWithTag("Enemy Spawner").GetComponent<EnemySpawner>();
         Animation_1_Idle();
 
         patrolPoints = new Transform[numberOfPatrolPoints];
@@ -54,6 +57,8 @@ public class EnemyTest : MonoBehaviour
             patrolPoints[i] = go.transform;
         }
 
+        chaseSpeed = es.chaseSpeed;
+        shootRate = es.shootRate;
         StartCoroutine(Patrol());
         currentHealth = Random.Range(1, 4);
 
@@ -83,6 +88,7 @@ public class EnemyTest : MonoBehaviour
     }
 
     void Update(){
+
         switch(currentHealth)
         {
             case 2:
@@ -159,17 +165,21 @@ public class EnemyTest : MonoBehaviour
                 yield break;
             }
 
-            if (Vector3.Distance(transform.position, player.position) <= 1.5f)
-            {
-                Animation_6_Attack();
-                yield return new WaitForSeconds(1f);
-                Animation_1_Idle();
-                yield return new WaitForSeconds(1f);
-            }
+            // if (Vector3.Distance(transform.position, player.position) <= 1.5f)
+            // {
+            //     Animation_6_Attack();
+            //     yield return new WaitForSeconds(1f);
+            //     Animation_1_Idle();
+            //     yield return new WaitForSeconds(1f);
+            // }
             if(shootTimer <=0)
             {
                 ShootBullet();
                 shootTimer = shootRate;
+                Animation_6_Attack();
+                yield return new WaitForSeconds(0.3f);
+                Animation_1_Idle();
+                yield return new WaitForSeconds(0.3f);
             }
             shootTimer -= Time.deltaTime;
             yield return null;

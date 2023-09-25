@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - BGM
   - Enemy_Bullet
+  - Enemy Spawner
   layers:
   - Default
   - TransparentFX
