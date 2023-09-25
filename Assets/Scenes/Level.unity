@@ -3286,8 +3286,10 @@ MonoBehaviour:
   maxSpawnPosition: {x: 8.21, y: 3.91}
   initialEnemyCount: 4
   timeBetweenWaves: 3
+  timeToDifficulty: 20
   minWave: 1
-  maxWave: 3
+  maxWave: 2
+  level: Level 1
 --- !u!4 &1203921939
 Transform:
   m_ObjectHideFlags: 0
@@ -9520,6 +9522,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7130699969910067038, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
+      propertyPath: es
+      value: 
+      objectReference: {fileID: 1203921938}
     - target: {fileID: 7130699969910067038, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
       propertyPath: tr
       value: 

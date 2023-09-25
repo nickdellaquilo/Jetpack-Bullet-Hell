@@ -171,7 +171,7 @@ MonoBehaviour:
   EnemyAnims:
   - {fileID: 8666745215718381762}
   patrolSpeed: 2
-  chaseSpeed: 4
+  chaseSpeed: 2
   spottingDistance: 8
   numberOfPatrolPoints: 5
   minPatrolBounds: {x: -8, y: -4}
@@ -180,3 +180,4 @@ MonoBehaviour:
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   bulletPrefab: {fileID: 3179197254723564968, guid: 6bbc3776cd7b74b869c925457599b6b8, type: 3}
   shootRate: 2
+  bulletSpeed: 5

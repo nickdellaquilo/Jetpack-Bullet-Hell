@@ -19,7 +19,14 @@ public class EnemyBulletBehavior : MonoBehaviour
         }
         if (col.tag == "Player")
         { 
-            player.currentFuel -= 1;
+            // Get the player's PlayerController script.
+            CharacterController charCon = col.gameObject.GetComponent<CharacterController>();
+
+            if (charCon != null)
+            {
+                // Call the PlayerDamage method on the player, passing the enemy's position.
+                charCon.PlayerDamage(transform.position);
+            }
             Destroy(gameObject);
         }
     }

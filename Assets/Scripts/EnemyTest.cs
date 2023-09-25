@@ -185,7 +185,8 @@ public class EnemyTest : MonoBehaviour
             GameObject bulletInstance = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
             // Calculate the direction towards the player
-            Vector3 shootDirection = (player.position - transform.position).normalized;
+            Vector3 randAng = new Vector3(Random.Range(-2f,2f), Random.Range(-2f,2f), 0f);
+            Vector3 shootDirection = (randAng + player.position - transform.position).normalized;
 
             Rigidbody2D bulletRb = bulletInstance.GetComponent<Rigidbody2D>();
             if (bulletRb)
@@ -210,14 +211,14 @@ public class EnemyTest : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Get the player's PlayerController script.
-            CharacterController charCon = collision.gameObject.GetComponent<CharacterController>();
+            // // Get the player's PlayerController script.
+            // CharacterController charCon = collision.gameObject.GetComponent<CharacterController>();
 
-            if (charCon != null)
-            {
-                // Call the PlayerDamage method on the player, passing the enemy's position.
-                charCon.PlayerDamage(transform.position);
-            }
+            // if (charCon != null)
+            // {
+            //     // Call the PlayerDamage method on the player, passing the enemy's position.
+            //     charCon.PlayerDamage(transform.position);
+            // }
         }
     }
 

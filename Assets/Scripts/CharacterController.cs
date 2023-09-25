@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class CharacterController : MonoBehaviour
 {
+    public EnemySpawner es;
     private Rigidbody2D rb;
 
     //Used for movement:
@@ -44,7 +45,7 @@ public class CharacterController : MonoBehaviour
     //Used for getting hit by an enemy
     public float knockbackForce = 5f; // Adjust the knockback force.
     public float invulnerableDuration = 1f; // Duration of invulnerability in seconds.
-    public Color invulnerableColor = Color.blue; // Color to indicate invulnerability.
+    public Color invulnerableColor = Color.red; // Color to indicate invulnerability.
 
     private bool isInvulnerable = false;
 
@@ -104,7 +105,7 @@ public class CharacterController : MonoBehaviour
             horiz = Input.GetAxisRaw("Horizontal");
             transform.Translate(horiz * speed * Time.deltaTime, 0f, 0f);
             if(Input.GetKey(KeyCode.W) && currentFuel > 0f){
-                currentFuel -= 0.0024f;
+                currentFuel -= 0.01f * es.maxWave;
                 rb.AddForce(Vector3.up * launchSpeed);
             }
         }
@@ -141,7 +142,7 @@ public class CharacterController : MonoBehaviour
             rb.velocity = knockbackDirection * knockbackForce;
 
             // Decrease fuel
-            currentFuel -= 1f;
+            currentFuel -= 2.5f;
 
             // Set invulnerable state and schedule the end of invulnerability
             isInvulnerable = true;
