@@ -1875,7 +1875,7 @@ GameObject:
   - component: {fileID: 723456856}
   m_Layer: 0
   m_Name: Jetpack Sprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9513,7 +9513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7774556529385763160, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}

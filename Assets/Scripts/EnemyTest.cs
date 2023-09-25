@@ -151,6 +151,22 @@ public class EnemyTest : MonoBehaviour
         if (other.CompareTag("Bullet"))
         {
             TakeDamage(1);
+        }  
+    }
+
+    //If the enemy collides with the Player, make them take damage CharacterController.
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Get the player's PlayerController script.
+            CharacterController charCon = collision.gameObject.GetComponent<CharacterController>();
+
+            if (charCon != null)
+            {
+                // Call the PlayerDamage method on the player, passing the enemy's position.
+                charCon.PlayerDamage(transform.position);
+            }
         }
     }
 

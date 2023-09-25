@@ -41,6 +41,13 @@ public class CharacterController : MonoBehaviour
 
     public CountdownUI timer;
 
+    //Used for getting hit by an enemy
+    public float knockbackForce = 5f; // Adjust the knockback force.
+    public float invulnerableDuration = 1f; // Duration of invulnerability in seconds.
+    public Color invulnerableColor = Color.blue; // Color to indicate invulnerability.
+
+    private bool isInvulnerable = false;
+
     void Start()
     {//Initialize values
         rb = GetComponent<Rigidbody2D>();
@@ -68,11 +75,14 @@ public class CharacterController : MonoBehaviour
         fuelBar.UpdateFuel(currentFuel, maxFuel);//check current fuel every frame and update slider
 
         //basic movement
-        horiz = Input.GetAxisRaw("Horizontal");
-        transform.Translate(horiz * speed * Time.deltaTime, 0f, 0f);
-        if(Input.GetKey(KeyCode.W) && currentFuel > 0f){
-            currentFuel -= 0.0024f;
-            rb.AddForce(Vector3.up * launchSpeed);
+        if(!isInvulnerable)
+        {
+            horiz = Input.GetAxisRaw("Horizontal");
+            transform.Translate(horiz * speed * Time.deltaTime, 0f, 0f);
+            if(Input.GetKey(KeyCode.W) && currentFuel > 0f){
+                currentFuel -= 0.0024f;
+                rb.AddForce(Vector3.up * launchSpeed);
+            }
         }
 
 
@@ -90,8 +100,17 @@ public class CharacterController : MonoBehaviour
         // Limit to vertical speed to prevent unwinnable scenarios.
         float clampedVerticalSpeed = Mathf.Clamp(rb.velocity.y, -maxDownwardsVelocity, maxUpwardsVelocity);
         rb.velocity = new Vector2(rb.velocity.x, clampedVerticalSpeed);
-    }
 
+        //Change color to blue when hit by enemy
+        if (isInvulnerable)
+        {
+            sr.color = invulnerableColor;
+        }
+        else
+        {
+            sr.color = Color.white;
+        }
+    }
 
     private IEnumerator Dash(){ //Dash Coroutine
         canDash = false;
@@ -107,6 +126,30 @@ public class CharacterController : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
 
+    }
+
+    public void PlayerDamage(Vector2 enemyPosition)
+    {
+        if (!isInvulnerable)
+        {
+            // Calculate knockback direction away from the enemy
+            Vector2 knockbackDirection = ((Vector2)transform.position - enemyPosition).normalized;
+
+            // Apply knockback force
+            rb.velocity = knockbackDirection * knockbackForce;
+
+            // Decrease fuel
+            currentFuel -= 1f;
+
+            // Set invulnerable state and schedule the end of invulnerability
+            isInvulnerable = true;
+            Invoke("EndInvulnerability", invulnerableDuration);
+        }
+    }
+
+    private void EndInvulnerability()
+    {
+        isInvulnerable = false;
     }
 
     void OnCollisionEnter2D(Collision2D col){
