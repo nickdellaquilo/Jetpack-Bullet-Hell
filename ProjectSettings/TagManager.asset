@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - Enemy
   - BGM
+  - Enemy_Bullet
   layers:
   - Default
   - TransparentFX

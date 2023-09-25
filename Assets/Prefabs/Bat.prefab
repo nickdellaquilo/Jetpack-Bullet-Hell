@@ -176,3 +176,7 @@ MonoBehaviour:
   numberOfPatrolPoints: 5
   minPatrolBounds: {x: -8, y: -4}
   maxPatrolBounds: {x: 8, y: 4}
+  flashDuration: 0.2
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  bulletPrefab: {fileID: 3179197254723564968, guid: 6bbc3776cd7b74b869c925457599b6b8, type: 3}
+  shootRate: 2

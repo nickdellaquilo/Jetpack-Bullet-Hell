@@ -31,6 +31,11 @@ public class EnemyTest : MonoBehaviour
     private bool isFlashing = false;
 
     //Enemies start by patrolling between patrol points
+    public GameObject bulletPrefab;
+    public float shootRate = 1.0f;
+    private float shootTimer;
+    public float bulletSpeed = 5f;
+
     void Start()
     {
         cc = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
@@ -140,10 +145,35 @@ public class EnemyTest : MonoBehaviour
                 Animation_1_Idle();
                 yield return new WaitForSeconds(1f);
             }
-            
+            if(shootTimer <=0)
+            {
+                ShootBullet();
+                shootTimer = shootRate;
+            }
+            shootTimer -= Time.deltaTime;
             yield return null;
         }
+        
     }
+
+    void ShootBullet()
+    {
+        if (bulletPrefab)
+        {
+            // Instantiate the bullet at the enemy's position
+            GameObject bulletInstance = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+
+            // Calculate the direction towards the player
+            Vector3 shootDirection = (player.position - transform.position).normalized;
+
+            Rigidbody2D bulletRb = bulletInstance.GetComponent<Rigidbody2D>();
+            if (bulletRb)
+            {
+                bulletRb.velocity = shootDirection * bulletSpeed;
+            }
+        }
+    }
+
 
     //If the enemy collides with a bullet, play the animation, and destroy the enemy
     void OnTriggerEnter2D(Collider2D other)
