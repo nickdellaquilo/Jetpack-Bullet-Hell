@@ -55,7 +55,7 @@ public class EnemyTest : MonoBehaviour
         }
 
         StartCoroutine(Patrol());
-        currentHealth = Random.Range(0, 4);
+        currentHealth = Random.Range(1, 4);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         switch(currentHealth)
@@ -80,6 +80,27 @@ public class EnemyTest : MonoBehaviour
 
 
         originalColor = spriteRenderer.color;
+    }
+
+    void Update(){
+        switch(currentHealth)
+        {
+            case 2:
+                spriteRenderer.color = Color.green;
+                break;
+
+            case 3:
+                spriteRenderer.color = Color.yellow;
+                break;
+
+            case 4:
+                spriteRenderer.color = Color.gray;
+                break;
+
+            default:
+                spriteRenderer.color = Color.white;
+                break;
+        }
     }
 
     //Patrol is a coroutine so that we can pause the enemy for a few seconds at each patrol point

@@ -150,6 +150,7 @@ public class CharacterController : MonoBehaviour
     private void EndInvulnerability()
     {
         isInvulnerable = false;
+        rb.velocity = new Vector3(0f,0f,0f);
     }
 
     void OnCollisionEnter2D(Collision2D col){
