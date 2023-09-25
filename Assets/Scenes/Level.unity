@@ -9450,7 +9450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3051962143304474886, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
       propertyPath: m_Mass
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3051962143304474886, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
       propertyPath: m_Constraints
@@ -9562,7 +9562,7 @@ PrefabInstance:
       objectReference: {fileID: 2042339939}
     - target: {fileID: 7130699969910067038, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
       propertyPath: launchSpeed
-      value: 3
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7130699969910067038, guid: e10d56bf07ad1e14f8038ff61b606103, type: 3}
       propertyPath: dashCooldown

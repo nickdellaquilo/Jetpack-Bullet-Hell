@@ -74,18 +74,6 @@ public class CharacterController : MonoBehaviour
 
         fuelBar.UpdateFuel(currentFuel, maxFuel);//check current fuel every frame and update slider
 
-        //basic movement
-        if(!isInvulnerable)
-        {
-            horiz = Input.GetAxisRaw("Horizontal");
-            transform.Translate(horiz * speed * Time.deltaTime, 0f, 0f);
-            if(Input.GetKey(KeyCode.W) && currentFuel > 0f){
-                currentFuel -= 0.0024f;
-                rb.AddForce(Vector3.up * launchSpeed);
-            }
-        }
-
-
         //Intiate Dash Coroutine and lose chunk of fuel
         if(Input.GetKeyDown(KeyCode.LeftShift) && canDash && currentFuel > 0f){
             currentFuel -= 2;
@@ -97,10 +85,6 @@ public class CharacterController : MonoBehaviour
             sr.flipX = !sr.flipX;
         }
 
-        // Limit to vertical speed to prevent unwinnable scenarios.
-        float clampedVerticalSpeed = Mathf.Clamp(rb.velocity.y, -maxDownwardsVelocity, maxUpwardsVelocity);
-        rb.velocity = new Vector2(rb.velocity.x, clampedVerticalSpeed);
-
         //Change color to blue when hit by enemy
         if (isInvulnerable)
         {
@@ -110,6 +94,24 @@ public class CharacterController : MonoBehaviour
         {
             sr.color = Color.white;
         }
+    }
+
+    void FixedUpdate()
+    {
+        //basic movement
+        if(!isInvulnerable)
+        {
+            horiz = Input.GetAxisRaw("Horizontal");
+            transform.Translate(horiz * speed * Time.deltaTime, 0f, 0f);
+            if(Input.GetKey(KeyCode.W) && currentFuel > 0f){
+                currentFuel -= 0.0024f;
+                rb.AddForce(Vector3.up * launchSpeed);
+            }
+        }
+
+        // Limit to vertical speed to prevent unwinnable scenarios.
+        float clampedVerticalSpeed = Mathf.Clamp(rb.velocity.y, -maxDownwardsVelocity, maxUpwardsVelocity);
+        rb.velocity = new Vector2(rb.velocity.x, clampedVerticalSpeed);
     }
 
     private IEnumerator Dash(){ //Dash Coroutine
