@@ -8,6 +8,7 @@ public class GameOver : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     private float survivalTime;
+    private float enemiesKilled;
 
     public void Awake()
     {
