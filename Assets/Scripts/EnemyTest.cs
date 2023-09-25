@@ -50,9 +50,30 @@ public class EnemyTest : MonoBehaviour
         }
 
         StartCoroutine(Patrol());
-        currentHealth = Random.Range(1, 4);
+        currentHealth = Random.Range(0, 4);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+        switch(currentHealth)
+        {
+            case 2:
+                spriteRenderer.color = Color.green;
+                break;
+
+            case 3:
+                spriteRenderer.color = Color.yellow;
+                break;
+
+            case 4:
+                spriteRenderer.color = Color.gray;
+                break;
+
+            default:
+                spriteRenderer.color = Color.white;
+                break;
+        }
+
+
+
         originalColor = spriteRenderer.color;
     }
 
