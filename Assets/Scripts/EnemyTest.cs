@@ -86,19 +86,19 @@ public class EnemyTest : MonoBehaviour
         switch(currentHealth)
         {
             case 2:
-                spriteRenderer.color = Color.green;
+                originalColor = Color.green;
                 break;
 
             case 3:
-                spriteRenderer.color = Color.yellow;
+                originalColor = Color.yellow;
                 break;
 
             case 4:
-                spriteRenderer.color = Color.gray;
+                originalColor = Color.gray;
                 break;
 
             default:
-                spriteRenderer.color = Color.white;
+                originalColor = Color.white;
                 break;
         }
     }
