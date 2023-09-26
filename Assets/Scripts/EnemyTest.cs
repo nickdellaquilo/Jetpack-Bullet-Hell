@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyTest : MonoBehaviour
 {
+    private Collider2D collider;
     private EnemySpawner es;
     private int currentLevel = 1;
     private CharacterController cc;
@@ -43,6 +44,7 @@ public class EnemyTest : MonoBehaviour
         cc = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         es = GameObject.FindGameObjectWithTag("Enemy Spawner").GetComponent<EnemySpawner>();
+        collider = GetComponent<Collider2D>();
         Animation_1_Idle();
 
         patrolPoints = new Transform[numberOfPatrolPoints];
@@ -247,14 +249,23 @@ public class EnemyTest : MonoBehaviour
         if(currentHealth <= 0)
         {
             Animation_4_Death();
-            if(dead){ //adds fuel to player when enemy dies. bool is here because the delay on death meant this code was running multiple times
-                cc.currentFuel += 2;
-                dead = false;
-            }
+
+            collider.enabled = false;
             
             Destroy(gameObject, 0.75f);
         }
     }
+
+    // private IEnumerator DeathTime(){
+    //         //         if(dead){ //adds fuel to player when enemy dies. bool is here because the delay on death meant this code was running multiple times
+    //         //     cc.kill = true;;
+    //         //     dead = false;
+    //         // }
+
+    //        // yield return new WaitForSeconds(0.2f);
+
+
+    // }
 
     private void EndFlash()
     {

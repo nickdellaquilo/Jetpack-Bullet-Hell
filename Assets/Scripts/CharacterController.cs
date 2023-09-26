@@ -9,6 +9,7 @@ public class CharacterController : MonoBehaviour
     private Collider2D collider;
     public EnemySpawner es;
     private Rigidbody2D rb;
+    public GameObject[] enemies;
 
     //Used for movement:
     public float speed;
@@ -16,6 +17,7 @@ public class CharacterController : MonoBehaviour
     public float maxUpwardsVelocity;
     public float maxDownwardsVelocity;
     private float horiz;
+
     
     //Used for dashing:
     public bool canDash = true;
@@ -29,6 +31,7 @@ public class CharacterController : MonoBehaviour
     public float maxFuel = 10f;
     public float currentFuel = 10f;
     [SerializeField] FuelBarControl fuelBar;
+    public bool kill = false;
 
 
     //Used for flipping asset based on where you're shooting:
@@ -50,6 +53,7 @@ public class CharacterController : MonoBehaviour
 
     private bool isInvulnerable = false;
 
+    private int enCount;
     void Start()
     {//Initialize values
         rb = GetComponent<Rigidbody2D>();
@@ -58,10 +62,18 @@ public class CharacterController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         shoot = GetComponentInChildren<ShootingScript>();
         collider = GetComponent<Collider2D>();
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        enCount = enemies.Length;
     }
 
     void Update()
     {
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if(enemies.Length < enCount){
+            kill = true;
+        }
+        enCount = enemies.Length;
+
         if(canDash){
             dashDisplay.color = Color.green;
             dashDisplay.text = "Dash Available";
@@ -72,10 +84,13 @@ public class CharacterController : MonoBehaviour
             dashDisplay.text = "Recharging";
             
         }
+        if(kill) {
+            currentFuel +=2;
+            kill = false;
+        }
         if(currentFuel < 0f) currentFuel = 0f;//if the player dashed right before running out of fuel, fuel would be at a large-sih negative value. This stops that
         if(currentFuel > maxFuel) currentFuel = maxFuel;
-        if(isInvulnerable) collider.enabled = false;
-        else collider.enabled = true;
+
 
         fuelBar.UpdateFuel(currentFuel, maxFuel);//check current fuel every frame and update slider
 
@@ -110,9 +125,9 @@ public class CharacterController : MonoBehaviour
             transform.Translate(horiz * speed * Time.deltaTime, 0f, 0f);
             if(Input.GetKey(KeyCode.W) && currentFuel > 0f){
                 if(es.maxWave < 6)
-                    currentFuel -= 0.02f * es.maxWave;
+                    currentFuel -= 0.01f * es.maxWave;
                 else
-                    currentFuel -= 0.02f * 5;
+                    currentFuel -= 0.01f * 5;
                 rb.AddForce(Vector3.up * launchSpeed);
             }
         }
