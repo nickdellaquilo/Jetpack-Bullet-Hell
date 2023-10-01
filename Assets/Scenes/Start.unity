@@ -1358,7 +1358,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'WASD - move
 
-    Space - jetpack
+    W - jetpack
 
     Shift - dash
 
